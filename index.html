@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>¡SonriFloss! Aprende jugando</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#2b2250;--bg1:#7be0ff;--bg2:#ffd6f0;--card:#fff;--soft:#f1ecff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#2a1b6b;--bg2:#14304d}}
+:root[data-theme="dark"]{--bg1:#2a1b6b;--bg2:#14304d}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:"Fredoka","Trebuchet MS","Comic Sans MS",system-ui,sans-serif;color:var(--ink);background:linear-gradient(160deg,var(--bg1),var(--bg2)) fixed;text-align:center;font-size:20px;-webkit-tap-highlight-color:transparent}
+main{max-width:720px;margin:0 auto;padding:12px 14px calc(120px + env(safe-area-inset-bottom,0px))}
+section{background:var(--card);border-radius:34px;border:6px solid var(--c,#ff8ad4);padding:20px 12px;margin:20px 0;box-shadow:0 10px 0 rgba(0,0,0,.18)}
+h1{font-size:clamp(40px,11vw,64px);margin:4px 0;color:#ff3d9a;text-shadow:3px 3px 0 #ffe14d}
+h2{font-size:clamp(28px,7vw,38px);margin:0 0 6px}
+p{margin:8px 0}
+button{font:inherit;font-weight:700;border:0;border-radius:22px;padding:10px 14px;margin:5px;cursor:pointer;color:#fff;background:#ff3d9a;box-shadow:0 6px 0 rgba(0,0,0,.25);touch-action:manipulation}
+button:active{transform:translateY(5px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
+.f{width:64px;height:64px;display:block;margin:0 auto}
+.w{display:block;font-size:16px;font-weight:700;line-height:1.1;margin-top:2px}
+.mascot{width:170px;display:inline-block;animation:bob 2s ease-in-out infinite;cursor:pointer}
+.mascot .f{width:150px;height:150px}.mascot .w{font-size:26px;color:#ff3d9a}
+@keyframes bob{50%{transform:translateY(-12px) rotate(4deg)}}
+.row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;align-items:flex-end}
+.row button{background:var(--soft);color:var(--ink);min-width:84px}
+.row button.on{background:#ffe14d;transform:scale(1.1)}
+.bar{height:22px;background:var(--soft);border-radius:20px;margin:12px 6px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#4cd964,#ffe14d,#ff3d9a);transition:width .6s}
+.lg{display:flex;justify-content:center;gap:18px;margin:8px 0}.lg .f{width:52px;height:52px}
+.mouth{display:flex;justify-content:center;align-items:flex-end;margin:12px 0;flex-wrap:wrap}
+.tooth{width:40px;height:84px;margin:0}.tooth svg{width:40px;height:84px}
+.gap{width:46px;height:70px;background:#ff9bb8;border-radius:0 0 18px 18px;padding:2px;margin:0;box-shadow:none;animation:wig 1s ease-in-out infinite}
+.gap .f{width:38px;height:38px}
+@keyframes wig{50%{transform:rotate(-8deg) scale(1.08)}}
+.gap.go{animation:swipe .4s}
+@keyframes swipe{50%{transform:translateY(-14px) rotate(40deg) scale(1.4)}}
+.gap.clean{background:#bff3d0;animation:none;font-size:30px}
+.msg{font-size:26px;min-height:34px;font-weight:700;color:#e0207a}
+.cnt{font-size:28px;font-weight:700}
+.slots,.tray{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:10px 0}
+.slot{width:84px;height:110px;border:4px dashed #b9a6ff;border-radius:18px;background:var(--soft);padding-top:6px;font-size:30px;color:#8a7bd0}
+.slot.f2{border:4px solid #4cd964;background:#d9ffe2;animation:pop .4s;color:var(--ink);font-size:16px}
+@keyframes pop{50%{transform:scale(1.2)}}
+.tray button{background:#ffb02e;width:90px}
+.shake{animation:sh .4s}
+@keyframes sh{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.opts button{background:#7b5cff;padding:14px 6px}
+.opts .e{font-size:64px;display:block;line-height:1.1}.opts .w{font-size:19px}
+.opts button.ok{background:#27ae60}.opts button.no{background:#e74c3c}
+.prod{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.prod div{background:var(--soft);border-radius:26px;padding:12px 6px;cursor:pointer}
+.prod .f{width:96px;height:96px}
+.med{display:flex;justify-content:center;gap:16px}.med .f{width:76px;height:76px}
+input{font:inherit;font-size:24px;padding:10px 14px;border-radius:18px;border:4px solid #ffb02e;width:80%;max-width:300px;text-align:center;color:var(--ink);background:#fff}
+.cert{display:none;background:linear-gradient(135deg,#fff3a8,#ffd1ec);border:6px double #ff9f1c;border-radius:28px;padding:16px;margin:12px 0;color:#2b2250;animation:pop .6s}
+.cert.show{display:block}
+details{text-align:left;background:var(--soft);border-radius:22px;padding:12px 18px;font-size:17px;margin-top:12px}
+summary{cursor:pointer;font-weight:700;text-align:center}
+details li{margin:6px 0}
+#guide{position:fixed;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px));max-width:560px;margin:0 auto;display:flex;align-items:center;gap:8px;z-index:20}
+#ge .f{width:62px;height:62px;animation:bob 2s ease-in-out infinite}
+#gb{background:#fff;color:var(--ink);border:4px solid #ff3d9a;border-radius:22px;padding:8px 14px;font-size:18px;font-weight:700;text-align:left;flex:1;box-shadow:0 5px 0 rgba(0,0,0,.2)}
+.pop{position:fixed;top:-50px;font-size:34px;animation:fall 3s linear forwards;z-index:30;pointer-events:none}
+@keyframes fall{to{transform:translateY(115vh) rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="tooth" viewBox="0 0 100 100"><path d="M24 20c0-11 13-13 26-6 13-7 26-5 26 6 0 14-6 22-6 40 0 14-4 26-10 26-8 0-6-22-10-22s-2 22-10 22c-6 0-10-12-10-26 0-18-6-26-6-40z" fill="#fff" stroke="#8fa6ff" stroke-width="4"/><circle cx="41" cy="36" r="3.5" fill="#2b2250"/><circle cx="59" cy="36" r="3.5" fill="#2b2250"/><path d="M42 46q8 8 16 0" fill="none" stroke="#2b2250" stroke-width="3" stroke-linecap="round"/></symbol>
+<symbol id="bug" viewBox="0 0 100 100"><g stroke="#2f7d2f" stroke-width="4" stroke-linecap="round"><path d="M30 70l-12 10M50 78v14M70 70l12 10M30 45l-14-6M70 45l14-6M42 28l-6-12M58 28l6-12"/></g><ellipse cx="50" cy="55" rx="27" ry="24" fill="#7ed957" stroke="#2f7d2f" stroke-width="4"/><circle cx="40" cy="50" r="8" fill="#fff"/><circle cx="60" cy="50" r="8" fill="#fff"/><circle cx="41" cy="51" r="4" fill="#2b2250"/><circle cx="59" cy="51" r="4" fill="#2b2250"/><path d="M40 68q10-7 20 0" fill="none" stroke="#2f7d2f" stroke-width="4" stroke-linecap="round"/></symbol>
+<symbol id="floss" viewBox="0 0 100 100"><path d="M28 10v30q0 14 22 14t22-14V10" fill="none" stroke="#ff3d9a" stroke-width="7" stroke-linecap="round"/><path d="M50 54v38" stroke="#ff3d9a" stroke-width="12" stroke-linecap="round"/><path d="M28 14Q50 24 72 14" fill="none" stroke="#3aa8ff" stroke-width="3"/></symbol>
+<symbol id="giraffe" viewBox="0 0 100 100"><path d="M40 40l-4-24M60 40l4-24" stroke="#c98a1d" stroke-width="5"/><circle cx="36" cy="15" r="6" fill="#8a4b12"/><circle cx="64" cy="15" r="6" fill="#8a4b12"/><ellipse cx="25" cy="48" rx="9" ry="6" fill="#ffd25e" stroke="#c98a1d" stroke-width="3"/><ellipse cx="75" cy="48" rx="9" ry="6" fill="#ffd25e" stroke="#c98a1d" stroke-width="3"/><ellipse cx="50" cy="60" rx="28" ry="26" fill="#ffd25e" stroke="#c98a1d" stroke-width="4"/><circle cx="34" cy="50" r="4" fill="#b8681e"/><circle cx="68" cy="46" r="5" fill="#b8681e"/><circle cx="40" cy="55" r="4" fill="#2b2250"/><circle cx="60" cy="55" r="4" fill="#2b2250"/><ellipse cx="50" cy="72" rx="14" ry="10" fill="#f2b84b"/><circle cx="45" cy="72" r="2" fill="#8a4b12"/><circle cx="55" cy="72" r="2" fill="#8a4b12"/></symbol>
+<symbol id="bunny" viewBox="0 0 100 100"><ellipse cx="36" cy="26" rx="10" ry="26" fill="#fff" stroke="#c8b6e8" stroke-width="4"/><ellipse cx="64" cy="26" rx="10" ry="26" fill="#fff" stroke="#c8b6e8" stroke-width="4"/><ellipse cx="36" cy="28" rx="4" ry="18" fill="#ffb6d0"/><ellipse cx="64" cy="28" rx="4" ry="18" fill="#ffb6d0"/><circle cx="50" cy="64" r="28" fill="#fff" stroke="#c8b6e8" stroke-width="4"/><circle cx="40" cy="60" r="4" fill="#2b2250"/><circle cx="60" cy="60" r="4" fill="#2b2250"/><ellipse cx="50" cy="70" rx="5" ry="4" fill="#ff7aa8"/><path d="M42 78q8 6 16 0" fill="none" stroke="#2b2250" stroke-width="3" stroke-linecap="round"/><path d="M28 70h-12M28 76l-11 5M72 70h12M72 76l11 5" stroke="#c8b6e8" stroke-width="2"/></symbol>
+<symbol id="lion" viewBox="0 0 100 100"><circle cx="50" cy="52" r="42" fill="#e8872b" stroke="#b5601a" stroke-width="4"/><circle cx="26" cy="26" r="9" fill="#ffd25e" stroke="#b5601a" stroke-width="3"/><circle cx="74" cy="26" r="9" fill="#ffd25e" stroke="#b5601a" stroke-width="3"/><circle cx="50" cy="55" r="29" fill="#ffd25e" stroke="#b5601a" stroke-width="3"/><circle cx="40" cy="50" r="4" fill="#2b2250"/><circle cx="60" cy="50" r="4" fill="#2b2250"/><path d="M44 60h12l-6 8z" fill="#b5601a"/><path d="M38 72q12 9 24 0" fill="none" stroke="#2b2250" stroke-width="3" stroke-linecap="round"/></symbol>
+<symbol id="panda" viewBox="0 0 100 100"><circle cx="24" cy="26" r="13" fill="#2b2250"/><circle cx="76" cy="26" r="13" fill="#2b2250"/><circle cx="50" cy="56" r="36" fill="#fff" stroke="#2b2250" stroke-width="4"/><ellipse cx="36" cy="52" rx="9" ry="12" fill="#2b2250" transform="rotate(20 36 52)"/><ellipse cx="64" cy="52" rx="9" ry="12" fill="#2b2250" transform="rotate(-20 64 52)"/><circle cx="37" cy="51" r="3" fill="#fff"/><circle cx="63" cy="51" r="3" fill="#fff"/><ellipse cx="50" cy="67" rx="6" ry="4" fill="#2b2250"/><path d="M42 75q8 6 16 0" fill="none" stroke="#2b2250" stroke-width="3" stroke-linecap="round"/></symbol>
+<symbol id="s1" viewBox="0 0 100 100"><circle cx="35" cy="22" r="13" fill="#ffcf9e" stroke="#2b2250" stroke-width="3"/><rect x="18" y="38" width="34" height="48" rx="14" fill="#4dc3ff" stroke="#2b2250" stroke-width="3"/><circle cx="74" cy="52" r="9" fill="#ffcf9e" stroke="#2b2250" stroke-width="3"/><rect x="63" y="63" width="22" height="26" rx="9" fill="#ff8ad4" stroke="#2b2250" stroke-width="3"/><path d="M52 60l11 8" stroke="#2b2250" stroke-width="4" stroke-linecap="round"/></symbol>
+<symbol id="s2" viewBox="0 0 100 100"><rect x="12" y="22" width="30" height="58" rx="10" fill="#fff" stroke="#8fa6ff" stroke-width="4"/><rect x="58" y="22" width="30" height="58" rx="10" fill="#fff" stroke="#8fa6ff" stroke-width="4"/><path d="M2 50H98" stroke="#3aa8ff" stroke-width="5" stroke-linecap="round"/><path d="M86 38l12 12-12 12" fill="none" stroke="#ff3d9a" stroke-width="5" stroke-linecap="round"/></symbol>
+<symbol id="s3" viewBox="0 0 100 100"><rect x="30" y="16" width="44" height="68" rx="14" fill="#fff" stroke="#8fa6ff" stroke-width="4"/><path d="M82 14C6 12 6 88 82 86" fill="none" stroke="#3aa8ff" stroke-width="6" stroke-linecap="round"/></symbol>
+<symbol id="s4" viewBox="0 0 100 100"><rect x="26" y="18" width="48" height="64" rx="14" fill="#fff" stroke="#8fa6ff" stroke-width="4"/><path d="M86 22v56" stroke="#ff3d9a" stroke-width="6" stroke-linecap="round"/><path d="M76 32l10-12 10 12M76 68l10 12 10-12" fill="none" stroke="#ff3d9a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="s5" viewBox="0 0 100 100"><rect x="26" y="36" width="48" height="54" rx="8" fill="#9fb0c8" stroke="#2b2250" stroke-width="4"/><rect x="20" y="26" width="60" height="10" rx="4" fill="#7a8ca8" stroke="#2b2250" stroke-width="4"/><path d="M42 26v-6h16v6M40 48v32M50 48v32M60 48v32" stroke="#2b2250" stroke-width="4" fill="none" stroke-linecap="round"/></symbol>
+<symbol id="m1" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#ffd23f" stroke="#c9961a" stroke-width="6"/><path d="M50 22l8 18 20 2-15 13 5 20-18-10-18 10 5-20-15-13 20-2z" fill="#fff"/></symbol>
+<symbol id="m2" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#cfd8e3" stroke="#8a97a8" stroke-width="6"/><path d="M50 22l8 18 20 2-15 13 5 20-18-10-18 10 5-20-15-13 20-2z" fill="#fff"/></symbol>
+<symbol id="m3" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#e09a5a" stroke="#a8652a" stroke-width="6"/><path d="M50 22l8 18 20 2-15 13 5 20-18-10-18 10 5-20-15-13 20-2z" fill="#fff"/></symbol>
+<symbol id="m0" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#d9d9e3" stroke="#aaa" stroke-width="6" stroke-dasharray="8 6"/><text x="50" y="66" font-size="48" text-anchor="middle" fill="#999" font-family="sans-serif">?</text></symbol>
+</defs></svg>
+<main>
+<section style="--c:#ff8ad4">
+  <div class="mascot" id="mas" onclick="hi()"></div>
+  <h1>¡SonriFloss!</h1>
+  <p><b>Pequeños hábitos, grandes sonrisas</b></p>
+  <p>👇 ¡Elige a tu amigo!</p>
+  <div class="row" id="chars"></div>
+  <div class="bar"><i id="prog"></i></div>
+</section>
+
+<section style="--c:#4dc3ff">
+  <h2>¡Bichitos escondidos!</h2>
+  <div class="row" id="intro"></div>
+</section>
+
+<section style="--c:#4cd964">
+  <h2>¡Cazabichos!</h2>
+  <p>👆 Toca cada bichito con la seda</p>
+  <div class="lg" id="lg"></div>
+  <div class="cnt" id="cnt"></div>
+  <div class="mouth" id="mouth"></div>
+  <div class="msg" id="msg"></div>
+  <button onclick="build()">🔄 Otra vez</button>
+</section>
+
+<section style="--c:#ffb02e">
+  <h2>¡Ordena los pasos!</h2>
+  <p>👆 Toca en orden: 1, 2, 3, 4, 5</p>
+  <div class="slots" id="slots"></div>
+  <div class="tray" id="tray"></div>
+  <div class="msg" id="smsg"></div>
+</section>
+
+<section style="--c:#ff8ad4">
+  <h2>Mis portasedas</h2>
+  <div class="prod" id="prod"></div>
+</section>
+
+<section style="--c:#7b5cff">
+  <h2>¡Preguntas!</h2>
+  <div id="q"></div>
+</section>
+
+<section style="--c:#ffe14d">
+  <h2>Mis medallas</h2>
+  <div class="med" id="medals"></div>
+  <p>¿Cómo te llamas? ✏️</p>
+  <input id="nm" maxlength="20" placeholder="Tu nombre" autocomplete="off">
+  <div class="cert" id="cert"><svg class="f" style="width:90px;height:90px" viewBox="0 0 100 100"><use href="#m1"/></svg><h2>¡Súper Héroe de la Seda!</h2><p id="who"></p><p>Pequeños hábitos, grandes sonrisas 🌟</p></div>
+  <details><summary>👨‍👩‍👧 Para papás y cuidadores</summary>
+  <ul>
+    <li>Un adulto acompaña y supervisa la limpieza interdental; la autonomía llega poco a poco.</li>
+    <li>No forzar el hilo si hay resistencia. Si hay dolor, deshilachado o sangrado persistente, suspender y consultar al odontólogo.</li>
+    <li>El portaseda es personal y desechable. El dispensador se guarda cerrado y fuera del alcance de los niños pequeños.</li>
+    <li>La seda complementa el cepillado y los controles odontológicos; no los reemplaza.</li>
+    <li>SonriFloss es una propuesta educativa en fase de prototipo: aún no tiene eficacia clínica demostrada.</li>
+  </ul></details>
+</section>
+</main>
+<div id="guide"><div id="ge"></div><div id="gb">¡Hola! Toca a un amigo 👆</div></div>
+
+<script>
+var won={game:0,steps:0,quiz:0},cur=0,AC=null;
+function F(id,c){return '<svg class="'+(c||"f")+'" viewBox="0 0 100 100"><use href="#'+id+'"/></svg>'}
+function FW(id,w){return F(id)+'<span class="w">'+w+'</span>'}
+function $(i){return document.getElementById(i)}
+function say(t){$("gb").textContent=t}
+function tone(f,d,t,s){setTimeout(function(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();var o=AC.createOscillator(),g=AC.createGain();o.type=t||"triangle";o.frequency.value=f;g.gain.value=.14;o.connect(g);g.connect(AC.destination);o.start();g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+d);o.stop(AC.currentTime+d)}catch(e){}},s||0)}
+function seq(a,d,t){a.forEach(function(f,i){tone(f,d,t,i*d*700)})}
+function yay(){seq([523,659,784,1047],.2)}
+function bad(){tone(200,.3,"sawtooth");tone(150,.3,"sawtooth",150)}
+function boom(l){l=l||["⭐","🎉","✨","💖","🎈"];for(var i=0;i<30;i++){var s=document.createElement("span");s.className="pop";s.textContent=l[i%l.length];s.style.left=Math.random()*95+"vw";s.style.animationDelay=Math.random()*.9+"s";document.body.appendChild(s);setTimeout(function(x){x.remove()},4200,s)}}
+var CH=[["giraffe","Gigi","Llega a los espacios entre tus dientes.",[523,659,784,988]],["bunny","Bunny","Hazlo con movimientos suaves.",[784,659,784,880]],["lion","Leo","Cuida tu sonrisa todos los días.",[196,247,196,294]],["panda","Panda","¡Yo cuido el dispensador!",[440,392,440,330]]];
+function pickChar(i){cur=i;var c=CH[i];$("mas").innerHTML=FW(c[0],c[1]);$("ge").innerHTML=F(c[0]);var b=document.querySelectorAll("#chars button");for(var k=0;k<b.length;k++)b[k].className=k==i?"on":"";seq(c[3],.22);boom();say(c[1]+": "+c[2])}
+function hi(){pickChar(cur)}
+CH.forEach(function(x,i){var b=document.createElement("button");b.innerHTML=FW(x[0],x[1]);b.onclick=function(){pickChar(i)};$("chars").appendChild(b)});
+$("mas").innerHTML=FW("giraffe","Gigi");$("ge").innerHTML=F("giraffe");document.querySelector("#chars button").className="on";
+$("intro").innerHTML='<div>'+FW("tooth","Diente")+'</div><div style="font-size:40px;align-self:center">➡️</div><div>'+FW("bug","Bichito")+'</div>';
+$("lg").innerHTML='<div>'+FW("tooth","Diente")+'</div><div>'+FW("bug","Bichito")+'</div><div>'+FW("floss","Seda")+'</div>';
+$("prod").innerHTML='<div id="p1">'+FW("giraffe","Kids")+'<span class="w">con un adulto</span></div><div id="p2">'+FW("panda","Roll")+'<span class="w">solo el adulto lo abre</span></div>';
+$("p1").onclick=function(){seq([523,659,784],.2);say("Kids: portaseda con mango grande. ¡Con un adulto!")};
+$("p2").onclick=function(){seq([440,392,330],.25);say("Roll: dispensador panda. Solo lo abre el adulto.")};
+function medals(){var n=won.game+won.steps+won.quiz;$("medals").innerHTML='<div>'+FW(won.game?"m1":"m0","Bichos")+'</div><div>'+FW(won.steps?"m2":"m0","Pasos")+'</div><div>'+FW(won.quiz?"m3":"m0","Preguntas")+'</div>';$("prog").style.width=(n/3*100)+"%";
+if(n==3){var nm=$("nm").value.trim();$("who").textContent="Para: "+(nm||"ti")+" 💖";$("cert").classList.add("show");say("¡Felicidades"+(nm?" "+nm:"")+"! ¡Eres un súper héroe!");setTimeout(function(){seq([523,659,784,659,784,1047,1319],.2);boom()},700)}}
+var left=7;
+function build(){var m=$("mouth");m.innerHTML="";left=7;$("cnt").textContent="Bichitos: 0 / 7";$("msg").textContent="";
+for(var i=0;i<7;i++){var t=document.createElement("div");t.className="tooth";t.innerHTML=F("tooth");m.appendChild(t);var g=document.createElement("button");g.className="gap";g.innerHTML=F("bug");g.setAttribute("aria-label","Limpiar con seda");g.style.animationDelay=(i*.12)+"s";g.onclick=clean;m.appendChild(g)}
+var l=document.createElement("div");l.className="tooth";l.innerHTML=F("tooth");m.appendChild(l)}
+function clean(e){var g=e.currentTarget;if(g.classList.contains("clean")||g.classList.contains("go"))return;g.innerHTML=F("floss");g.classList.add("go");setTimeout(function(){g.textContent="✨";g.classList.remove("go");g.classList.add("clean")},400);left--;var d=7-left;tone(500+d*90,.18);tone(900+d*90,.12,"sine",110);$("cnt").textContent="Bichitos: "+d+" / 7";var w=["¡Muy bien!","¡Sigue así!","¡Genial!","¡Wow!","¡Casi!","¡Uno más!"];$("msg").textContent=w[Math.min(d-1,5)];
+if(!left){$("msg").textContent="🎉 ¡Todos limpios!";yay();boom();say("¡Bravo! ¡Todos los bichitos se fueron!");won.game=1;medals()}}
+var S=[["s1","Adulto ayuda","Un adulto prepara el hilo y me ayuda."],["s2","Entra suave","Desliza el hilo entre los dientes, sin apretar la encía."],["s3","Haz una C","Curva el hilo alrededor de un diente."],["s4","Sube y baja","Sube y baja suave. Luego el diente vecino."],["s5","A la basura","El hilo usado se tira. No se comparte."]],nx=0;
+function steps(){nx=0;var sl=$("slots"),tr=$("tray");sl.innerHTML="";tr.innerHTML="";$("smsg").textContent="";
+S.forEach(function(s,i){var d=document.createElement("div");d.className="slot";d.textContent=i+1;sl.appendChild(d)});
+[0,1,2,3,4].sort(function(){return Math.random()-.5}).forEach(function(i){var b=document.createElement("button");b.innerHTML=FW(S[i][0],S[i][1]);b.onclick=function(){if(i==nx){var d=sl.children[i];d.className="slot f2";d.innerHTML=FW(S[i][0],S[i][1]);b.style.visibility="hidden";tone(440+i*110,.25);tone(660+i*110,.2,"sine",120);say(S[i][2]);nx++;if(nx==5){$("smsg").textContent="🎉 ¡Todos en orden!";setTimeout(function(){yay();boom(["⭐","✨"]);won.steps=1;medals()},1200)}}else{b.classList.add("shake");setTimeout(function(){b.classList.remove("shake")},400);bad();say("Uy, busca el paso "+(nx+1)+".")}};tr.appendChild(b)})}
+var Q=[["¿Qué hace la seda dental?","floss","🧼","Limpia","🍬","Da dulces"],["¿Quién me ayuda con la seda?","s1","🧑‍🤝‍🧒","Un adulto","🙈","Nadie"],["¿Cómo pasamos el hilo?","s2","🐢","Suave","💪","Fuerte"],["Si duele o se atasca...","bug","🙋","Pido ayuda","😬","Sigo jalando"],["¿Compartimos el portaseda?","s5","🚫","No, es mío","🤝","Sí"]],qi=0;
+function ask(){var q=$("q");if(qi>=Q.length){q.innerHTML=F("m3","f")+"<b>¡Todo bien!</b>";won.quiz=1;yay();medals();return}
+var c=Q[qi];q.innerHTML="<p>"+(qi+1)+" / "+Q.length+"</p>"+F(c[1],"f")+"<p><b>"+c[0]+"</b></p><div class='opts'></div>";say(c[0]);tone(660,.15);
+var o=q.querySelector(".opts"),a=[{e:c[2],t:c[3],ok:1},{e:c[4],t:c[5],ok:0}];if(Math.random()<.5)a.reverse();
+a.forEach(function(x){var b=document.createElement("button");b.innerHTML='<span class="e">'+x.e+'</span><span class="w">'+x.t+'</span>';b.onclick=function(){if(x.ok){b.className="ok";yay();boom(["⭐"]);say("¡Correcto!");setTimeout(function(){qi++;ask()},1400)}else{b.className="no";bad();say("¡Uy! Intenta otra vez.")}};o.appendChild(b)})}
+build();steps();ask();medals();
+</script>
+</body>
+</html>
